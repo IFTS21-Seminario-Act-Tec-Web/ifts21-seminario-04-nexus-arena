@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexus Arena | Centro de E-Sports & Gaming High-End</title>
+  <meta name="description" content="Nexus Arena: estaciones de gaming de alto rendimiento, simuladores de carrera, torneos y cabinas de streaming en Buenos Aires.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- Tipografías: Syne (Cyber/Display) y DM Sans (Legibilidad) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- CSS Personalizado Nexus Arena (prefijo nx-) -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <a class="nx-skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- =====================================================
+       NAVBAR (Glassmorphism Dark con resplandor neón)
+       ===================================================== -->
+  <nav class="navbar navbar-expand-lg fixed-top nx-navbar" id="siteNav">
+    <div class="container">
+      <a class="navbar-brand nx-brand" href="#inicio">
+        <span class="nx-brand-icon"><i class="bi bi-cpu-fill"></i></span>
+        <span class="nx-brand-text">NEXUS <strong>ARENA</strong></span>
+      </a>
+      <button class="navbar-toggler nx-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navLinks"
+              aria-controls="navLinks" aria-expanded="false" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navLinks">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
+          <li class="nav-item"><a class="nav-link nx-nav-link" href="#inicio"        data-section="inicio">Home</a></li>
+          <li class="nav-item"><a class="nav-link nx-nav-link" href="#estaciones"   data-section="estaciones">Estaciones</a></li>
+          <li class="nav-item"><a class="nav-link nx-nav-link" href="#simulador"    data-section="simulador">Configurar Setup</a></li>
+          <li class="nav-item"><a class="nav-link nx-nav-link" href="#tracking"     data-section="tracking">Mi Sesión</a></li>
+          <li class="nav-item"><a class="nav-link nx-nav-link" href="#precios"      data-section="precios">Pases</a></li>
+          <li class="nav-item"><a class="nav-link nx-nav-link" href="#contacto"     data-section="contacto">Contacto</a></li>
+          <li class="nav-item"><a class="nav-link nx-nav-cta"  href="#simulador">Reservar Rig</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="contenido">
+
+    <!-- ===================================================
+         HERO SECTION
+         =================================================== -->
+    <section class="nx-hero" id="inicio">
+      <div class="nx-hero-bg" aria-hidden="true"></div>
+      <div class="nx-hero-overlay" aria-hidden="true"></div>
+      <div class="container nx-hero-content">
+        <div class="row align-items-end">
+          <div class="col-lg-8">
+            <span class="nx-eyebrow">
+              <i class="bi bi-broadcast"></i> Arena E-Sports · CABA · 1 Gbps Dedicado
+            </span>
+            <h1>High Performance.<br><span>Cero Latencia.</span></h1>
+            <p>Estaciones de competición profesional con monitores 360Hz, rigs de simulación háptica y cabinas aisladas para streaming.</p>
+            <div class="nx-hero-actions">
+              <a class="btn nx-btn nx-btn-primary" href="#simulador">
+                <i class="bi bi-controller"></i> Configurar mi sesión
+              </a>
+              <a class="btn nx-btn nx-btn-outline" href="#tracking">
+                <i class="bi bi-qr-code-scan"></i> Consultar mi pase
+              </a>
+            </div>
+            <div class="nx-hero-stats">
+              <div><strong>48</strong><span>Rigs RTX 4080</span></div>
+              <div><strong>360Hz</strong><span>Tasa de refresco</span></div>
+              <div><strong>0.8ms</strong><span>Latencia de red</span></div>
+            </div>
+          </div>
+          <div class="col-lg-4 d-none d-lg-block">
+            <div class="nx-hero-card">
+              <span class="nx-status-live"><i class="bi bi-circle-fill"></i> Servidores Activos</span>
+              <strong>Torneo Semanal Valorant</strong>
+              <p>Fase clasificatoria en progreso. Servidores locales de baja latencia.</p>
+              <a href="#contacto">Inscribir squad <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         ESTACIONES / HARDWARE
+         =================================================== -->
+    <section class="nx-section nx-stations" id="estaciones">
+      <div class="container">
+        <div class="row align-items-end mb-5">
+          <div class="col-lg-6">
+            <span class="nx-eyebrow">El Ecosistema</span>
+            <h2>Hardware de nivel<br><span>profesional.</span></h2>
+          </div>
+          <div class="col-lg-6">
+            <p>Equipamiento homologado para torneos internacionales de CS2, Valorant, League of Legends y F1 SimRacing.</p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <article class="nx-card">
+              <div class="nx-card-icon"><i class="bi bi-display"></i></div>
+              <h3>PC Pro Elite</h3>
+              <p>RTX 4080 Super, i7 14700KF, 32GB DDR5, monitores ZOWIE 360Hz DyAc+.</p>
+              <span class="nx-tag">Competitivo</span>
+            </article>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <article class="nx-card">
+              <div class="nx-card-icon"><i class="bi bi-speedometer"></i></div>
+              <h3>SimRacing Rigs</h3>
+              <p>Cockpits Fanatec Direct Drive 15Nm, pedalera con celda de carga y triple pantalla 2K.</p>
+              <span class="nx-tag">Simulación</span>
+            </article>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <article class="nx-card">
+              <div class="nx-card-icon"><i class="bi bi-camera-video"></i></div>
+              <h3>Cabina Creator</h3>
+              <p>Setup acustizado con cámara Sony Alpha 4K, Shure SM7B y doble PC para stream sin caídas.</p>
+              <span class="nx-tag">Streaming</span>
+            </article>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <article class="nx-card">
+              <div class="nx-card-icon"><i class="bi bi-dpad"></i></div>
+              <h3>PlayStation 5 Pro</h3>
+              <p>Sillones ergonómicos, pantallas OLED 4K 120Hz para FC26, Tekken 8 y Street Fighter 6.</p>
+              <span class="nx-tag">Consolas</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         COTIZADOR / RECOMENDADOR DIAGNÓSTICO INTERACTIVO
+         =================================================== -->
+    <section class="nx-section nx-simulador" id="simulador">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5">
+            <span class="nx-eyebrow">Calculador en Vivo</span>
+            <h2>Configurá tu<br><span>experiencia.</span></h2>
+            <p>Seleccioná tu setup, la duración y los periféricos deseados. El sistema calcula la tarifa en tiempo real.</p>
+            <ul class="nx-check-list">
+              <li><i class="bi bi-shield-check"></i> Perfil guardado en la nube</li>
+              <li><i class="bi bi-lightning-charge"></i> Acceso a toda la librería de Steam y Epic</li>
+              <li><i class="bi bi-cup-straw"></i> Servicio a la estación de snacks y bebidas</li>
+            </ul>
+          </div>
+          <div class="col-lg-7">
+            <div class="nx-config-box">
+              <h3>Simulador de Puesto</h3>
+              <div class="row g-3 mt-2">
+                <div class="col-md-6">
+                  <label class="nx-label">Tipo de Estación</label>
+                  <select class="form-select nx-select" id="setupType">
+                    <option value="pc" data-price="4500">PC Pro Elite (RTX 4080)</option>
+                    <option value="sim" data-price="7000">SimRacing Cockpit (Fanatec)</option>
+                    <option value="stream" data-price="8500">Cabina Streaming Aislada</option>
+                    <option value="ps5" data-price="3500">PlayStation 5 Pro (OLED)</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="nx-label">Horas de Juego</label>
+                  <select class="form-select nx-select" id="setupHours">
+                    <option value="1">1 Hora</option>
+                    <option value="2">2 Horas (10% OFF)</option>
+                    <option value="4" selected>4 Horas (Pase Media Jornada - 20% OFF)</option>
+                    <option value="8">Pase Nocturno All Night (8 hs)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="nx-price-display mt-4">
+                <div>
+                  <small>TOTAL ESTIMADO</small>
+                  <strong id="calcTotal">$14.400</strong>
+                </div>
+                <button class="btn nx-btn nx-btn-primary" id="btnReservarSim" type="button">
+                  <i class="bi bi-calendar-check"></i> Reservar este Rig
+                </button>
+              </div>
+              <div id="simMessage" class="nx-sim-message" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         TRACKING / CONSULTA DE PASE SIN LOGIN (GET BY ID)
+         =================================================== -->
+    <section class="nx-section nx-tracking" id="tracking">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <span class="nx-eyebrow">Consulta Pública de Sesión</span>
+            <h2>Ingresá tu código<br><span>o GamerTag.</span></h2>
+            <p>Verificá en tiempo real el estado de tu turno, el puesto asignado y la clave temporal de acceso al rig sin necesidad de loguearte.</p>
+            <div class="nx-tracking-steps">
+              <span><b>01</b> Código de reserva</span>
+              <span><b>02</b> Asignación de Rig</span>
+              <span><b>03</b> Desbloqueo de Estación</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="nx-tracking-box">
+              <h3>Estado de mi Pase</h3>
+              <p>Ingresá tu código de pase (Ej: NX-9081, NX-4022 o NX-1004)</p>
+              <div class="nx-tracking-form">
+                <input class="form-control nx-input" id="trackingInput" type="text" placeholder="Ej: NX-9081" maxlength="12">
+                <button class="btn nx-btn nx-btn-primary" id="btnTracking" type="button">
+                  <i class="bi bi-search"></i> Consultar
+                </button>
+              </div>
+              <div id="trackingResultado" class="nx-tracking-result" aria-live="polite"></div>
+              <small class="nx-tracking-note">
+                ⚡ Demo Frontend: En la etapa de backend se consultará en tiempo real contra FastAPI.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         PRECIOS / PASES
+         =================================================== -->
+    <section class="nx-section nx-pricing" id="precios">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="nx-eyebrow">Membresías y Tarifas</span>
+          <h2>Elegí tu nivel<br><span>de juego.</span></h2>
+        </div>
+        <div class="row g-4 justify-content-center align-items-center">
+          <div class="col-lg-4 col-md-8">
+            <article class="nx-price-card">
+              <span class="nx-price-label">Casual</span>
+              <h3>Pase Por Hora</h3>
+              <div class="nx-price">$4.500 <small>/ hora</small></div>
+              <ul>
+                <li><i class="bi bi-check2"></i> Acceso a PC Pro Elite</li>
+                <li><i class="bi bi-check2"></i> Periféricos mecánicos</li>
+                <li><i class="bi bi-check2"></i> Red 1 Gbps fibra simétrica</li>
+              </ul>
+              <a class="btn nx-btn nx-btn-outline-light w-100" href="#simulador">Cargar pase</a>
+            </article>
+          </div>
+          <div class="col-lg-4 col-md-8">
+            <article class="nx-price-card nx-price-featured">
+              <span class="nx-badge-glow">Más Popular</span>
+              <span class="nx-price-label">Competitivo</span>
+              <h3>Noctámbulo (All-Night)</h3>
+              <div class="nx-price">$22.000 <small>/ 8 horas</small></div>
+              <ul>
+                <li><i class="bi bi-check2"></i> De 23:00 a 07:00 hs</li>
+                <li><i class="bi bi-check2"></i> Bebida energética de cortesía</li>
+                <li><i class="bi bi-check2"></i> Prioridad en Torneos Express</li>
+                <li><i class="bi bi-check2"></i> Puesto fijo reservado</li>
+              </ul>
+              <a class="btn nx-btn nx-btn-primary w-100" href="#simulador">Reservar All-Night</a>
+            </article>
+          </div>
+          <div class="col-lg-4 col-md-8">
+            <article class="nx-price-card">
+              <span class="nx-price-label">Equipos</span>
+              <h3>Bootcamp Squad</h3>
+              <div class="nx-price">$90.000 <small>/ 6 horas</small></div>
+              <ul>
+                <li><i class="bi bi-check2"></i> Sala privada para 5 jugadores + Coach</li>
+                <li><i class="bi bi-check2"></i> Pizarra táctica digital</li>
+                <li><i class="bi bi-check2"></i> Servidor privado de práctica</li>
+              </ul>
+              <a class="btn nx-btn nx-btn-outline-light w-100" href="#contacto">Consultar Squad</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         CONTACTO
+         =================================================== -->
+    <section class="nx-section nx-contact" id="contacto">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-5">
+            <span class="nx-eyebrow">Contacto & Eventos</span>
+            <h2>¿Querés armar<br><span>un torneo?</span></h2>
+            <p>Organizamos eventos corporativos, competencias de e-sports intercolegiales y lanzamientos de producto.</p>
+            <div class="nx-contact-data">
+              <span><i class="bi bi-envelope"></i> arena@nexusgaming.com.ar</span>
+              <span><i class="bi bi-geo-alt"></i> Av. Corrientes 4500, Almagro, CABA</span>
+              <span><i class="bi bi-clock"></i> Abierto 24/7 (Viernes a Domingo)</span>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <form class="nx-form" id="contactForm" novalidate>
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="nx-label">GamerTag / Nombre</label>
+                  <input class="form-control nx-input" type="text" name="name" required minlength="3" placeholder="Tu nombre">
+                </div>
+                <div class="col-md-6">
+                  <label class="nx-label">Email</label>
+                  <input class="form-control nx-input" type="email" name="email" required placeholder="tu@email.com">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="nx-label">Motivo</label>
+                <select class="form-select nx-select" name="subject">
+                  <option value="">Seleccioná una opción</option>
+                  <option>Reserva de Bootcamp (Squad)</option>
+                  <option>Inscripción a Torneos</option>
+                  <option>Alquiler para Evento / Cumpleaños</option>
+                  <option>Soporte de Cuenta</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="nx-label">Mensaje</label>
+                <textarea class="form-control nx-input" name="message" rows="4" required minlength="10" placeholder="Detallanos qué juego o fecha buscás..."></textarea>
+              </div>
+              <button class="btn nx-btn nx-btn-primary w-100" type="submit">
+                Enviar Consulta <i class="bi bi-send-fill"></i>
+              </button>
+              <p class="nx-form-message" id="formMessage" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="nx-footer">
+    <div class="container">
+      <div class="row align-items-center text-center g-3">
+        <div class="col-lg-4 text-lg-start">
+          <span class="nx-brand-text">NEXUS <strong>ARENA</strong></span>
+        </div>
+        <div class="col-lg-4">
+          <p class="mb-0">© <span id="year"></span> Nexus Arena · Seminario de Tecnología Web · IFTS 19</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <span>High Performance Gaming Hub</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="nx-back-to-top" id="backToTop" type="button" aria-label="Volver arriba">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
