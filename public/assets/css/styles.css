@@ -921,3 +921,13 @@ h1, h2, h3 {
     transition: none !important;
   }
 }
+
+.whatsapp-btn {
+  position: fixed;
+  bottom: 5px; /* Misma altura que el otro botón */
+  right: 60px;  /* Aumentamos la distancia desde el borde derecho */
+  width: 60px;
+  height: 60px;
+  z-index: 900;
+  transition: transform 0.3s ease;
+}
