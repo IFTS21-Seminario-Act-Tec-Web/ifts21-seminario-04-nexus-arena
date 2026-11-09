@@ -921,3 +921,20 @@ h1, h2, h3 {
     transition: none !important;
   }
 }
+/* Estados de validación de los formularios */
+.nx-form .nx-field-error { display: none; font-size: .85rem; margin-top: .4rem; }
+.nx-form .is-invalid ~ .nx-field-error { display: block; }
+.nx-form .is-invalid { border-color: #ff6d83; }
+.nx-form .is-valid { border-color: #25b898; }
+.nx-field-help { display: block; margin-top: .65rem; opacity: .8; }
+.nx-form-message.nx-error-message { color: #ff8495; }
+
+.whatsapp-btn {
+  position: fixed;
+  bottom: 5px; /* Misma altura que el otro botón */
+  right: 60px;  /* Aumentamos la distancia desde el borde derecho */
+  width: 60px;
+  height: 60px;
+  z-index: 900;
+  transition: transform 0.3s ease;
+}

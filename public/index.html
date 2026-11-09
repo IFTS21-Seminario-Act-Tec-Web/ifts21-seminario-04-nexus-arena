@@ -1,3 +1,5 @@
+HTML:
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -220,11 +222,12 @@
               <h3>Estado de mi Pase</h3>
               <p>Ingresá tu código de pase (Ej: NX-9081, NX-4022 o NX-1004)</p>
               <div class="nx-tracking-form">
-                <input class="form-control nx-input" id="trackingInput" type="text" placeholder="Ej: NX-9081" maxlength="12">
+                <input class="form-control nx-input" id="trackingInput" type="text" placeholder="Ej: NX-9081" maxlength="7" autocomplete="off" aria-label="Código de pase" aria-describedby="trackingAyuda">
                 <button class="btn nx-btn nx-btn-primary" id="btnTracking" type="button">
                   <i class="bi bi-search"></i> Consultar
                 </button>
               </div>
+              <small id="trackingAyuda" class="nx-field-help">Formato: NX- seguido de cuatro números (ejemplo: NX-9081).</small>
               <div id="trackingResultado" class="nx-tracking-result" aria-live="polite"></div>
               <small class="nx-tracking-note">
                 ⚡ Demo Frontend: En la etapa de backend se consultará en tiempo real contra FastAPI.
@@ -311,16 +314,16 @@
               <div class="row g-3 mb-3">
                 <div class="col-md-6">
                   <label class="nx-label">GamerTag / Nombre</label>
-                  <input class="form-control nx-input" type="text" name="name" required minlength="3" placeholder="Tu nombre">
+                  <input class="form-control nx-input" type="text" name="name" required minlength="3" maxlength="60" autocomplete="name" placeholder="Tu nombre">
                 </div>
                 <div class="col-md-6">
                   <label class="nx-label">Email</label>
-                  <input class="form-control nx-input" type="email" name="email" required placeholder="tu@email.com">
+                  <input class="form-control nx-input" type="email" name="email" required maxlength="120" autocomplete="email" placeholder="tu@email.com">
                 </div>
               </div>
               <div class="mb-3">
                 <label class="nx-label">Motivo</label>
-                <select class="form-select nx-select" name="subject">
+                <select class="form-select nx-select" name="subject" required>
                   <option value="">Seleccioná una opción</option>
                   <option>Reserva de Bootcamp (Squad)</option>
                   <option>Inscripción a Torneos</option>
@@ -330,7 +333,7 @@
               </div>
               <div class="mb-3">
                 <label class="nx-label">Mensaje</label>
-                <textarea class="form-control nx-input" name="message" rows="4" required minlength="10" placeholder="Detallanos qué juego o fecha buscás..."></textarea>
+                <textarea class="form-control nx-input" name="message" rows="4" required minlength="10" maxlength="1000" placeholder="Detallanos qué juego o fecha buscás..."></textarea>
               </div>
               <button class="btn nx-btn nx-btn-primary w-100" type="submit">
                 Enviar Consulta <i class="bi bi-send-fill"></i>
@@ -363,6 +366,15 @@
   <button class="nx-back-to-top" id="backToTop" type="button" aria-label="Volver arriba">
     <i class="bi bi-arrow-up"></i>
   </button>
+
+   <a href="https://wa.me/5491112345678?text=Hola,%20me%20gustaría%20recibir%20más%20información" 
+    class="whatsapp-btn" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp">
+    <img src="C:\Users\Administrator\Desktop\Nexus\ifts21-seminario-04-nexus-arena\public\assets\img/whatsapp.svg"alt="WhatsApp" class="whatsapp-icon">
+  </a>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
