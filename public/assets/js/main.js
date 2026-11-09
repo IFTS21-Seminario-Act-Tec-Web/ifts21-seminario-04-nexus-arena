@@ -152,6 +152,14 @@ const simMessage     = document.getElementById('simMessage');
 function recalcularTarifa() {
   if (!setupType || !setupHours || !calcTotal) return;
 
+  // La selección siempre debe corresponder a una opción habilitada.
+  if (!setupType.value || !['1', '2', '4', '8'].includes(setupHours.value)) {
+    calcTotal.textContent = 'Selección inválida';
+    if (btnReservarSim) btnReservarSim.disabled = true;
+    return;
+  }
+  if (btnReservarSim) btnReservarSim.disabled = false;
+
   // Obtenemos la opción seleccionada y extraemos su metadata
   const selectedOption = setupType.options[setupType.selectedIndex];
   const valorHoraBase  = parseInt(selectedOption.getAttribute('data-price') || '4500', 10);
@@ -182,8 +190,10 @@ recalcularTarifa();
 btnReservarSim?.addEventListener('click', () => {
   if (!simMessage) return;
 
-  // Feedback temporal de simulación
-  simMessage.textContent = '✓ Configuración guardada. En el próximo hito este botón derivará a la pasarela de pagos en FastAPI.';
+  // Confirmación explícita de que es una simulación (no se reserva ni cobra).
+  const estacion = setupType?.selectedOptions[0]?.textContent || 'Estación';
+  const horas = setupHours?.value || '0';
+  simMessage.textContent = `✓ Simulación: ${estacion}, ${horas} hora(s), total ${calcTotal?.textContent}. No se creó una reserva real.`;
   
   setTimeout(() => {
     simMessage.textContent = '';
@@ -241,41 +251,42 @@ const DEMO_PASES = {
   }
 };
 
+let consultaPendiente = null;
+
 function procesarConsultaPase() {
   if (!trackingInput || !trackingResultado) return;
 
+  // Normalizamos el código: eliminamos espacios y aceptamos letras minúsculas.
   const codigo = trackingInput.value.trim().toUpperCase();
+  trackingInput.value = codigo;
+  clearTimeout(consultaPendiente);
 
-  // Validación 1: Campo vacío o longitud insuficiente
-  if (!codigo || codigo.length < 4) {
-    trackingResultado.innerHTML = `
-      <div class="alert alert-danger p-2 small mt-2" role="alert">
-        <i class="bi bi-exclamation-triangle-fill"></i> Ingresá un código de pase válido (Ej: NX-9081).
-      </div>
-    `;
+  // Formato obligatorio: NX- y exactamente cuatro dígitos.
+  if (!/^NX-\d{4}$/.test(codigo)) {
+    trackingInput.classList.add('is-invalid');
+    trackingInput.setAttribute('aria-invalid', 'true');
+    trackingResultado.innerHTML = `<div class="alert alert-danger p-2 small mt-2" role="alert">
+      <i class="bi bi-exclamation-triangle-fill"></i> Ingresá un código con formato NX-1234.
+    </div>`;
     return;
   }
 
-  // Estado de carga (Loading State) para simular la latencia de red
-  trackingResultado.innerHTML = `
-    <div class="text-center py-3">
-      <div class="spinner-border spinner-border-sm text-info" role="status"></div>
-      <span class="small text-muted ms-2">Consultando disponibilidad en la Arena...</span>
-    </div>
-  `;
+  trackingInput.classList.remove('is-invalid');
+  trackingInput.removeAttribute('aria-invalid');
+  trackingResultado.innerHTML = `<div class="text-center py-3" role="status">
+    <div class="spinner-border spinner-border-sm text-info" aria-hidden="true"></div>
+    <span class="small text-muted ms-2">Consultando el pase...</span>
+  </div>`;
 
-  // Simulamos delay de respuesta del servidor (600 ms)
-  setTimeout(() => {
-    // Si el código existe en el mock usamos sus datos, sino generamos un estado estándar
-    const infoPase = DEMO_PASES[codigo] || {
-      rig: 'RIG #08 (Competitivo)',
-      estado: 'CONFIRMADO EN COLA',
-      horario: 'Turno programado para hoy',
-      pin: '5532',
-      pasoActual: 1
-    };
+  consultaPendiente = setTimeout(() => {
+    const infoPase = DEMO_PASES[codigo];
+    if (!infoPase) {
+      trackingResultado.innerHTML = `<div class="alert alert-warning p-2 small mt-2" role="status">
+        No encontramos el pase ${codigo} en los datos de demostración. Probá NX-9081, NX-4022 o NX-1004.
+      </div>`;
+      return;
+    }
 
-    // Renderizamos la tarjeta de trazabilidad visual
     trackingResultado.innerHTML = `
       <div class="nx-track-card mt-3">
         <div class="nx-track-header">
@@ -283,26 +294,24 @@ function procesarConsultaPase() {
           <span class="nx-track-badge">${infoPase.estado}</span>
         </div>
         <p class="small mb-1 text-light">
-          <strong>Horario:</strong> ${infoPase.horario} | 
+          <strong>Horario:</strong> ${infoPase.horario} |
           <strong>PIN de Activación:</strong> <span class="text-info">${infoPase.pin}</span>
         </p>
-        
-        <!-- Línea de tiempo interactiva según el estado -->
         <div class="nx-timeline mt-3">
-          <div class="nx-step ${infoPase.pasoActual >= 1 ? 'completed' : ''}">
-            <div class="nx-step-dot"></div>Reserva
-          </div>
-          <div class="nx-step ${infoPase.pasoActual >= 2 ? 'completed' : ''}">
-            <div class="nx-step-dot"></div>Puesto Asignado
-          </div>
-          <div class="nx-step ${infoPase.pasoActual >= 3 ? 'completed' : ''}">
-            <div class="nx-step-dot"></div>En Juego
-          </div>
+          <div class="nx-step ${infoPase.pasoActual >= 1 ? 'completed' : ''}"><div class="nx-step-dot"></div>Reserva</div>
+          <div class="nx-step ${infoPase.pasoActual >= 2 ? 'completed' : ''}"><div class="nx-step-dot"></div>Puesto Asignado</div>
+          <div class="nx-step ${infoPase.pasoActual >= 3 ? 'completed' : ''}"><div class="nx-step-dot"></div>En Juego</div>
         </div>
-      </div>
-    `;
+      </div>`;
   }, 600);
 }
+
+trackingInput?.addEventListener('input', () => {
+  trackingInput.classList.remove('is-invalid');
+  trackingInput.removeAttribute('aria-invalid');
+  clearTimeout(consultaPendiente);
+  if (trackingResultado) trackingResultado.textContent = '';
+});
 
 btnTracking?.addEventListener('click', procesarConsultaPase);
 
@@ -338,26 +347,76 @@ trackingInput?.addEventListener('keydown', (event) => {
 const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
-contactForm?.addEventListener('submit', (event) => {
-  // Prevenimos el envío tradicional con recarga de página
-  event.preventDefault();
+// Errores específicos para cada campo, sin depender solo de los avisos del navegador.
+const mensajesCampo = {
+  name: 'Ingresá tu nombre o GamerTag (entre 3 y 60 caracteres).',
+  email: 'Ingresá una dirección de correo electrónico válida.',
+  subject: 'Seleccioná un motivo de consulta.',
+  message: 'Escribí un mensaje de entre 10 y 1000 caracteres.'
+};
 
-  // Validamos si todos los campos cumplen con los requisitos (required, minlength, type="email")
-  if (!contactForm.checkValidity()) {
-    contactForm.reportValidity();
-    return;
+function validarCampo(campo) {
+  const valor = campo.value.trim();
+  const nombre = campo.name;
+  let valido = valor.length > 0;
+
+  if (nombre === 'name') valido = valor.length >= 3 && valor.length <= 60;
+  if (nombre === 'email') valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor) && campo.checkValidity();
+  if (nombre === 'subject') valido = valor !== '';
+  if (nombre === 'message') valido = valor.length >= 10 && valor.length <= 1000;
+
+  campo.classList.toggle('is-invalid', !valido);
+  campo.classList.toggle('is-valid', valido);
+  campo.setAttribute('aria-invalid', String(!valido));
+
+  let ayuda = document.getElementById(`error-${nombre}`);
+  if (!ayuda) {
+    ayuda = document.createElement('div');
+    ayuda.id = `error-${nombre}`;
+    ayuda.className = 'invalid-feedback nx-field-error';
+    campo.insertAdjacentElement('afterend', ayuda);
   }
+  ayuda.textContent = valido ? '' : mensajesCampo[nombre];
+  campo.setAttribute('aria-describedby', ayuda.id);
+  return valido;
+}
 
-  // Notificación de éxito en el DOM
-  if (formMessage) {
-    formMessage.textContent = '✓ Consulta registrada con éxito. En la etapa de backend se enviará al router de FastAPI.';
-  }
+if (contactForm) {
+  const campos = Array.from(contactForm.querySelectorAll('[name]'));
 
-  // Limpiamos los campos tras el envío satisfactorio
-  contactForm.reset();
+  // Feedback en tiempo real una vez que se tocó el campo.
+  campos.forEach(campo => {
+    campo.addEventListener('blur', () => validarCampo(campo));
+    campo.addEventListener(campo.tagName === 'SELECT' ? 'change' : 'input', () => {
+      if (campo.classList.contains('is-invalid') || campo.classList.contains('is-valid')) {
+        validarCampo(campo);
+      }
+      if (formMessage) formMessage.textContent = '';
+    });
+  });
 
-  // Ocultamos el mensaje de confirmación tras 5 segundos
-  setTimeout(() => {
-    if (formMessage) formMessage.textContent = '';
-  }, 5000);
-});
+  contactForm.addEventListener('submit', event => {
+    event.preventDefault();
+    // Evaluamos todos los campos para mostrar todos los errores de una vez.
+    const resultados = campos.map(validarCampo);
+    if (resultados.some(valido => !valido)) {
+      if (formMessage) {
+        formMessage.textContent = 'Revisá los campos marcados antes de enviar la consulta.';
+        formMessage.classList.add('nx-error-message');
+      }
+      campos.find(campo => campo.classList.contains('is-invalid'))?.focus();
+      return;
+    }
+
+    // Demo frontend: la consulta NO se almacena ni envía a un servidor.
+    if (formMessage) {
+      formMessage.classList.remove('nx-error-message');
+      formMessage.textContent = '✓ Formulario validado correctamente (demostración). No se enviaron datos a un servidor.';
+    }
+    contactForm.reset();
+    campos.forEach(campo => {
+      campo.classList.remove('is-valid', 'is-invalid');
+      campo.removeAttribute('aria-invalid');
+    });
+  });
+}
